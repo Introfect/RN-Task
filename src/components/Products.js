@@ -24,7 +24,8 @@ const Products = () => {
     const uniqueProperty= property && Array.from(new Set(property))
     property && setPropertyMap(uniqueProperty )
     const date=data.map((item)=>item.date)
-    setDateMap(date)
+    const uniqueDate= date && Array.from(new Set(date))
+    setDateMap(uniqueDate)
   },[])
   const handleClearFilters = () => {
     setSelectedLocation('');
@@ -70,6 +71,9 @@ const Products = () => {
   };
   return (
     <div className='bg-gray-300/50 mx-auto max-w-7xl reltive '>
+      <h1
+      className='text-2xl font-bold md:text-4xl md:font-extrabold lg:text-5xl'
+      >Search Properties to rent</h1>
       <div className='flex justify-center md:hidden'>
         <div className='bg-indigo-500 text-white p-3 max-w-min font-semibold cursor-pointer rounded-md px-5'
         onClick={() => setShow(true)}
@@ -96,7 +100,7 @@ const Products = () => {
        
       ) : null}
       
-      <div  className="hidden md:flex md:w-full justify-around  inset-0 z-20 left-4 right-auto max-h-min bg-white py-2 rounded-md drop-shadow-md overflow-y-auto">
+      <div  className="hidden md:flex md:w-full justify-around items-center  inset-0 z-20 left-4 right-auto max-h-min bg-white py-2 rounded-md drop-shadow-md overflow-y-auto">
        <FormSelect
             type={"location"} 
             size="small"
@@ -125,25 +129,36 @@ const Products = () => {
             dropDown={propertyMap && propertyMap}
             onValueChange={(e) => setSelectedPropertyType(e)}
             />
-            <div className='flex space-x-4'>
+            <div className='flex space-x-4 items-center'>
 
              <Button
             variant="contained"
-            sx={{backgroundColor:indigo[500]}}
+            sx={{backgroundColor:indigo[500],
+            minWidth:100,
+            height:40,
+            borderRadius:2,
+            fontWeight:'bold'
+            }}
             onClick={handleFilterClick}
             >
               Search
             </Button>
             <Button
             variant="contained"
-            sx={{backgroundColor:indigo[500],minWidth:'md'}}
+            sx={{
+              backgroundColor:indigo[500],
+              minWidth:150,
+              height:40,
+              borderRadius:2,
+              fontWeight:'bold'
+            }}
             onClick={handleClearFilters}
             >
               Clear Filters
             </Button>
             </div>
       </div>
-      <div class="mx-auto grid max-w-screen-lg grid-cols-1 gap-5 p-5 sm:grid-cols-2 md:grid-cols-3 lg:gap-10">
+      <div class="mx-auto grid grid-cols-1 gap-5 p-5 sm:grid-cols-2 md:grid-cols-3 lg:gap-6">
 
         {filter.length? (filter.map((item)=>{
         
@@ -152,8 +167,10 @@ const Products = () => {
           <a href="#" class="block h-full w-full">
             <img class="max-h-40 w-full object-cover" alt="featured image" src="https://images.unsplash.com/photo-1660241588741-d653d53348fa?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw5fHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60" />
             <div class="w-full bg-white p-4">
-              <p class="text-md font-medium text-indigo-500">`${item.price}/month`</p>
-              <p class="mb-2 text-xl font-medium text-gray-800">{item.location}</p>
+              <p class="text-md font-medium text-indigo-500"><span
+              className='font-black'
+              >`${item.price}</span>/month`</p>
+              <p class="mb-2 text-xl text-gray-800 font-bold">{item.location}</p>
               <p class="text-md font-light text-gray-400">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Esse vel neque ipsam?</p>
               <div class="justify-starts mt-4 flex flex-wrap items-center">
                 <div class="mr-2 mt-1 rounded-2xl bg-blue-100 py-1.5 px-4 text-xs text-gray-600">#js</div>
